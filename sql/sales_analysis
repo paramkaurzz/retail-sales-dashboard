@@ -1,0 +1,63 @@
+-- Retail Sales & Business Performance Dashboard
+-- SQL Analysis
+
+-- 1. View sample records
+SELECT *
+FROM retail_sales
+LIMIT 10;
+
+
+-- 2. Total revenue
+SELECT SUM(C12) AS Total_Revenue
+FROM retail_sales;
+
+
+-- 3. Average transaction value
+SELECT AVG(C12) AS Average_Transaction_Value
+FROM retail_sales;
+
+
+-- 4. Revenue by product
+SELECT C7 AS Product,
+       SUM(C12) AS Total_Revenue
+FROM retail_sales
+GROUP BY C7
+ORDER BY Total_Revenue DESC;
+
+
+-- 5. Top 5 products by revenue
+SELECT C7 AS Product,
+       SUM(C12) AS Total_Revenue
+FROM retail_sales
+GROUP BY C7
+ORDER BY Total_Revenue DESC
+LIMIT 5;
+
+
+-- 6. Revenue by store
+SELECT C4 AS Store,
+       SUM(C12) AS Total_Revenue
+FROM retail_sales
+GROUP BY C4
+ORDER BY Total_Revenue DESC;
+
+
+-- 7. Monthly revenue
+SELECT substr(C2,1,7) AS Month,
+       SUM(C12) AS Total_Revenue
+FROM retail_sales
+GROUP BY Month
+ORDER BY Total_Revenue DESC;
+
+
+-- 8. Total units sold
+SELECT SUM(C9) AS Total_Units_Sold
+FROM retail_sales;
+
+
+-- 9. Data quality check
+SELECT
+    COUNT(*) AS Total_Rows,
+    COUNT(C1) AS Orders,
+    COUNT(C12) AS Revenue_Records
+FROM retail_sales;
